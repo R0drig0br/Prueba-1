@@ -231,22 +231,28 @@ for (int i = 0; i < 6; i++)
 
         
 
-        for (i = 0; i != 6; i += 1)
+        for (i = 0; i != 6; i += 1){
             if (tallies[i] == 2) {
                 _2 = true;
                 _2_at = i+1;
             }
-
-        for (i = 0; i != 6; i += 1)
             if (tallies[i] == 3) {
                 _3 = true;
                 _3_at = i+1;
             }
-
+        }
+        return validate_Tallies_with_2(_2, _3, _2_at, _3_at);
+    }
+    
+    public static int validate_Tallies_with_2(boolean _2, boolean _3, int  _2_at, int _3_at){
         if (_2 && _3)
             return _2_at * 2 + _3_at * 3;
         else
             return 0;
     }
+    
+
+
 }
+
 
