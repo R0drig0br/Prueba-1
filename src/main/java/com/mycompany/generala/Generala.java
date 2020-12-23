@@ -125,39 +125,20 @@ public class Generala {
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5)
     {
-        int[] counts = new int[6];
-        counts[d1-1]++;
-        counts[d2-1]++;
-        counts[d3-1]++;
-        counts[d4-1]++;
-        counts[d5-1]++;
+        int counts[] = initializacionCounts(d1, d2, d3, d4, d5);
         int at;
         for (at = 0; at != 6; at++)
-            if (score_pair_condition(at, counts))
+            if (score_and_two_pair_condition(at, counts))
                 return (6-at)*2;
         return 0;
     }
-    
-    public static boolean score_pair_condition(int at, int counts[]){
-        
-        if(counts[6-at-1] >= 2)
-            return true;
-        
-        return false;
-    }
-
     public static int two_pair(int d1, int d2, int d3, int d4, int d5)
     {
-        int[] counts = new int[6];
-        counts[d1-1]++;
-        counts[d2-1]++;
-        counts[d3-1]++;
-        counts[d4-1]++;
-        counts[d5-1]++;
+        int counts[] = initializacionCounts(d1, d2, d3, d4, d5);
         int n = 0;
         int score = 0;
         for (int i = 0; i < 6; i += 1)
-            if (counts[6-i-1] >= 2) {
+            if (score_and_two_pair_condition(i, counts)) {
                 n++;
                 score += (6-i);
             }        
@@ -165,6 +146,24 @@ public class Generala {
             return score * 2;
         else
             return 0;
+    }
+    public static int[] initializacionCounts(int d1, int d2, int d3, int d4, int d5){
+        int[] counts = new int[6];
+        counts[d1-1]++;
+        counts[d2-1]++;
+        counts[d3-1]++;
+        counts[d4-1]++;
+        counts[d5-1]++;
+        
+        return counts;
+    }
+    
+    public static boolean score_and_two_pair_condition(int at, int counts[]){
+        
+        if(counts[6-at-1] >= 2)
+            return true;
+        
+        return false;
     }
 
     public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5)
