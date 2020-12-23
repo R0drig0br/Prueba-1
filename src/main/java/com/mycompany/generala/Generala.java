@@ -65,8 +65,7 @@ public class Generala {
     }
 
     public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        int s;    
-        s = 0;
+        int s=0;
         if (d1 == 3) s += 3;
         if (d2 == 3) s += 3;
         if (d3 == 3) s += 3;
@@ -88,8 +87,8 @@ public class Generala {
 
     public int fours()
     {
-        int sum;    
-        sum = 0;
+        int sum=0;    
+
         for (int at = 0; at != 5; at++) {
             if (dice[at] == 4) {
                 sum += 4;
@@ -97,6 +96,13 @@ public class Generala {
         }
         return sum;
     }
+    
+    public int foursValidate()
+    {
+        return 0;
+        
+    }
+    
 
     public int fives()
     {
@@ -127,9 +133,17 @@ public class Generala {
         counts[d5-1]++;
         int at;
         for (at = 0; at != 6; at++)
-            if (counts[6-at-1] >= 2)
+            if (score_pair_condition(at, counts))
                 return (6-at)*2;
         return 0;
+    }
+    
+    public static boolean score_pair_condition(int at, int counts[]){
+        
+        if(counts[6-at-1] >= 2)
+            return true;
+        
+        return false;
     }
 
     public static int two_pair(int d1, int d2, int d3, int d4, int d5)
