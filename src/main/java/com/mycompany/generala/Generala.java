@@ -24,16 +24,23 @@ public class Generala {
 
     // '(int... dice)' es similar a tener public static int generala(int d1, int d2, int d3 , etc) pero permite realizar operaciones como -> for (int die : dice)
     //es una forma de decir que el metodo puede aceptar 1 o más parametros de tipo int ... lista de parametros dinamicos.
+    
+    // se separo en 2 metodos para no tener 2 for en uno solo
     public static int generala(int... dice)
     {
         int[] counts = new int[6];
         for (int die : dice)
             counts[die-1]++;
+        return validateAccounts(counts);
+    }
+    
+    public static int validateAccounts(int counts[]){
         for (int i = 0; i != 6; i++)
             if (counts[i] == 5)
                 return 50;
         return 0;
     }
+    
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {
         int sum = 0;
@@ -185,14 +192,23 @@ public class Generala {
         tallies[d3-1] += 1;
         tallies[d4-1] += 1;
         tallies[d5-1] += 1;
-        if (tallies[0] == 1 &&
-            tallies[1] == 1 &&
-            tallies[2] == 1 &&
-            tallies[3] == 1 &&
-            tallies[4] == 1)
+
+        return smallStraightConfirmed(tallies);
+    }
+    
+    public static int smallStraightConfirmed(int tallies[]){
+        int count= 0;
+        for (int i = 0; i < tallies.length; i++) {
+            if(tallies[i]==1)
+            count++;
+        }
+        if(count==5)
             return 15;
+        
         return 0;
     }
+    
+    // cuidado con el metodo de abajo 
 
     public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
     {
