@@ -10,6 +10,9 @@ package com.mycompany.generala;
  * @author Marcelo
  */
 public class Generala {
+    
+    
+    
 
     public static int chance(int d1, int d2, int d3, int d4, int d5)
     {
@@ -41,37 +44,38 @@ public class Generala {
         return 0;
     }
     
-
+public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
+        int[] counts = new int[6];
+        
+        counts[0]=d1;
+        counts[1]=d2;
+        counts[2]=d3;
+        counts[3]=d4;
+        counts[4]=d5;
+        int suma=0;
+        for (int i = 0; i < counts.length; i++) {
+            if(counts[i]==condicion){
+                suma++;
+            }
+        }
+        return suma;
+    }
     public static int ones(int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == 1) sum++;
-        if (d2 == 1) sum++;
-        if (d3 == 1) sum++;
-        if (d4 == 1) sum++;
-        if (d5 == 1) 
-            sum++;
-
+        int condicion=1;
+        int sum = sum(d1, d2, d3, d4, d5,condicion);
         return sum;
     }
-
+    
     public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == 2) sum += 2;
-        if (d2 == 2) sum += 2;
-        if (d3 == 2) sum += 2;
-        if (d4 == 2) sum += 2;
-        if (d5 == 2) sum += 2;
-        return sum;
+        int condicion=2;
+        int sum = sum(d1, d2, d3, d4, d5,condicion);
+        return sum*2;
     }
 
     public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        int s=0;
-        if (d1 == 3) s += 3;
-        if (d2 == 3) s += 3;
-        if (d3 == 3) s += 3;
-        if (d4 == 3) s += 3;
-        if (d5 == 3) s += 3;
-        return s;
+        int condicion=3;
+        int sum = sum(d1, d2, d3, d4, d5,condicion);
+        return sum*3;
     }
 
     protected int[] dice;
@@ -126,8 +130,7 @@ public class Generala {
     public static int score_pair(int d1, int d2, int d3, int d4, int d5)
     {
         int counts[] = initializacionCounts(d1, d2, d3, d4, d5);
-        int at;
-        for (at = 0; at != 6; at++)
+        for (int at = 0; at != 6; at++)
             if (score_and_two_pair_condition(at, counts))
                 return (6-at)*2;
         return 0;
@@ -249,9 +252,5 @@ for (int i = 0; i < 6; i++)
         else
             return 0;
     }
-    
-
-
 }
-
 
