@@ -219,26 +219,6 @@ int codition=4;
 
         return smallStraightConfirmed(tallies);
     }
-    
-    public static int smallStraightConfirmed(int tallies[]){
-        int count= validatecount(tallies);
-        if(count==5)
-            return 15;
-        
-        return 0;
-    }
-
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
-    {
-        int tallies[] = initializacionCounts(d1, d2, d3, d4, d5);
-        int count= validatecount(tallies);
-        if(count== 5){
-            return 20; 
-        }
-        return 0;
-    }
-    
-    
     public static int validatecount(int[] tallies){
         int count=0;
         for (int i = 0; i < tallies.length; i++) {
@@ -248,8 +228,32 @@ int codition=4;
         }
         return count;
     }
-
+    public static int smallStraightConfirmed(int tallies[]){
+        int count= validatecount(tallies);
+        int retorno=15;
+        return smallStraight_and_large_Straight_Condition(count, retorno);
+    }
+        
+    public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
+    {
+        int tallies[] = initializacionCounts(d1, d2, d3, d4, d5);
+        int count= validatecount(tallies);
+        int retorno=20;
+        return smallStraight_and_large_Straight_Condition(count, retorno);
+    }
+    
+    // este metodo se hizo para hacer una comparacion de count con 5 y como los 2 metodos que estan arriba hacian lo mismo 
+    // entonces se hizo un metodo para hacer esta comparacion pero lo diferente es el retorno que se crea en los respectivos metodos
+    public static int smallStraight_and_large_Straight_Condition(int count,int retorno){
+        if(count==5){
+            return retorno;
+        }
+        return 0;
+    }
+           
     // se hizo un refactoring con los 2 metodos de abajo 
+    
+    
     
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5)
     {
@@ -267,6 +271,9 @@ int codition=4;
                 _3 = true;
                 _3_at = i+1;
             }
+
+
+            
         }
         return validate_Full_House(_2, _3, _2_at, _3_at);
     }
@@ -277,5 +284,7 @@ int codition=4;
         else
             return 0;
     }
+    
+    
 }
 
