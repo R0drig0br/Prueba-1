@@ -88,43 +88,45 @@ public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
         dice[3] = d4;
         dice[4] = _5;
     }
+    
+    public int validateFor_five_six(int condition){
+        int suma=0;
+        int i;
+        for ( i = 0; i < dice.length; i++) {
+            suma+=validate_Four_five_six(condition, i);
+        }
+        
+        return suma;
+    }
+        public int validate_Four_five_six(int condition, int i){
+        int suma=0;
+        if (dice[i] == condition) {
+                suma += condition;
+            }
+        return suma;
+    }
 
     public int fours()
     {
-        int sum=0;    
-
-        for (int at = 0; at != 5; at++) {
-            if (dice[at] == 4) {
-                sum += 4;
-            }
-        }
-        return sum;
-    }
-    
-    public int foursValidate()
-    {
-        return 0;
+        int suma=0;
+        int condition=4;
         
+        for (int at = 0; at != 5; at++) {
+            suma+=validate_Four_five_six(condition, at);
+        }
+        return suma;
     }
-    
 
     public int fives()
     {
-        int s = 0;
-        int i;
-        for (i = 0; i < dice.length; i++) 
-            if (dice[i] == 5)
-                s = s + 5;
-        return s;
+        int codition=5;   
+        return validateFor_five_six(codition);
     }
 
     public int sixes()
     {
-        int sum = 0;
-        for (int at = 0; at < dice.length; at++) 
-            if (dice[at] == 6)
-                sum = sum + 6;
-        return sum;
+        int codition=6;
+        return validateFor_five_six(codition);
     }
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5)
@@ -207,9 +209,7 @@ for (int i = 0; i < 6; i++)
     public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
     {
         int tallies[] = initializacionCounts(d1, d2, d3, d4, d5);
-        
         int count= validatecount(tallies);
-        
         if(count== 5){
             return 20; 
         }
@@ -243,10 +243,10 @@ for (int i = 0; i < 6; i++)
                 _3_at = i+1;
             }
         }
-        return validate_Tallies_with_2(_2, _3, _2_at, _3_at);
+        return validate_Full_House(_2, _3, _2_at, _3_at);
     }
     
-    public static int validate_Tallies_with_2(boolean _2, boolean _3, int  _2_at, int _3_at){
+    public static int validate_Full_House(boolean _2, boolean _3, int  _2_at, int _3_at){
         if (_2 && _3)
             return _2_at * 2 + _3_at * 3;
         else
