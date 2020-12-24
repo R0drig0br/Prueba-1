@@ -12,17 +12,12 @@ package com.mycompany.generala;
 public class Generala {
     
     
-    
+    // se borro la variable que fue creada en este metodo y ahora solo retorna la suma de todos los datos ingresados por parametro 
+    // como es una operacion matematicas sensilla, se piensa que hacer el retorno de esta forma no afecta el funcionamiento del programa
 
     public static int chance(int d1, int d2, int d3, int d4, int d5)
     {
-        int total = 0;
-        total += d1;
-        total += d2;
-        total += d3;
-        total += d4;
-        total += d5;
-        return total;
+        return d1+d2+d3+d4+d5;
     }
 
     // '(int... dice)' es similar a tener public static int generala(int d1, int d2, int d3 , etc) pero permite realizar operaciones como -> for (int die : dice)
@@ -44,14 +39,18 @@ public class Generala {
         return 0;
     }
     
+    // se crea un metodo llamado sum cuya funcion es el de recorrer un arreglo y verificar si es igual a de la condicion dada por parametro
+    // si es asi se suma 1 a la variable suma y retorna el total de esta variable
+    // este metodo se usa en los metodos ones - twos - threes
+    
 public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
         int[] counts = new int[6];
-        
         counts[0]=d1;
         counts[1]=d2;
         counts[2]=d3;
         counts[3]=d4;
         counts[4]=d5;
+        
         int suma=0;
         for (int i = 0; i < counts.length; i++) {
             if(counts[i]==condicion){
@@ -187,8 +186,8 @@ public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
     
 
     public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5){    
-int tallies[] = initializacionCounts(_1, _2, d3, d4, d5);       
-int codition=4;
+        int tallies[] = initializacionCounts(_1, _2, d3, d4, d5);       
+        int codition=4;
 
         return three_and_four_of_a_king_For(tallies, codition);
     }
@@ -270,10 +269,7 @@ int codition=4;
             if (tallies[i] == 3) {
                 _3 = true;
                 _3_at = i+1;
-            }
-
-
-            
+            }   
         }
         return validate_Full_House(_2, _3, _2_at, _3_at);
     }
