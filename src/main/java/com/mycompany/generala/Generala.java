@@ -89,6 +89,9 @@ public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
         dice[4] = _5;
     }
     
+    // en los metodos fiver y sixer se usa un for con el mismo largo, se hace el for para no tener que repetir el mismo proceso 
+    // ademas se le hace el llamado a otro metodo que es el validate_Four_five_six
+    
     public int validateFor_five_six(int condition){
         int suma=0;
         int i;
@@ -98,6 +101,9 @@ public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
         
         return suma;
     }
+    
+    // la funcion del validate_Four_five_six es compara los valores de un arreglo para ver si es igual a un numero especifico 
+    // el unico metodo que usa este metodo por si solo es el fours ya que el for tiene una codicion diferente al de los demas 
         public int validate_Four_five_six(int condition, int i){
         int suma=0;
         if (dice[i] == condition) {
@@ -129,6 +135,17 @@ public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
         return validateFor_five_six(codition);
     }
 
+    
+    // este metodo se usa para validar una codicion de los metodos score_pair y two_pair
+    
+    public static boolean score_and_two_pair_condition(int at, int counts[]){
+        
+        if(counts[6-at-1] >= 2)
+            return true;
+        
+        return false;
+    }
+    
     public static int score_pair(int d1, int d2, int d3, int d4, int d5)
     {
         int counts[] = initializacionCounts(d1, d2, d3, d4, d5);
@@ -148,10 +165,14 @@ public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
                 score += (6-i);
             }        
         if (n == 2)
-            return score * 2;
+            return score * n;
         else
             return 0;
     }
+    
+    // se instancia un arreglo numerico, esto se hace por que en varios metodos se hace un llamdo igual de los valores que contiene el arreglo.
+    //los metodos en los que se llama son 
+    //two_pair - score_pair - four_of_a_kind - three_of_a_kind - smallStraight - largeStraight - fullHouse
     public static int[] initializacionCounts(int d1, int d2, int d3, int d4, int d5){
         int[] counts = new int[6];
         counts[d1-1]++;
@@ -163,31 +184,32 @@ public static int sum(int d1, int d2, int d3, int d4, int d5, int condicion){
         return counts;
     }
     
-    public static boolean score_and_two_pair_condition(int at, int counts[]){
-        
-        if(counts[6-at-1] >= 2)
-            return true;
-        
-        return false;
-    }
+    
 
-    public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5)
-    {
-        
+    public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5){    
+int tallies[] = initializacionCounts(_1, _2, d3, d4, d5);       
+int codition=4;
 
-int tallies[] = initializacionCounts(_1, _2, d3, d4, d5);        
-for (int i = 0; i < 6; i++)
-            if (tallies[i] >= 4)
-                return (i+1) * 4;
-        return 0;
+        return three_and_four_of_a_king_For(tallies, codition);
     }
 
     public static int three_of_a_kind(int d1, int d2, int d3, int d4, int d5)
     {
         int t[] = initializacionCounts(d1, d2, d3, d4, d5);
-        for (int i = 0; i < 6; i++)
-            if (t[i] >= 3)
-                return (i+1) * 3;
+        int codition=3;
+        
+        return three_and_four_of_a_king_For(t, codition);
+    }
+    
+    // este metodo se hizo para recorrer el arreglo creado en los 2 metodos anteriores y comparar si alguno de los valores que contiene el arreglo 
+    // es igual a de las condiciones de cada metodo 
+    // como el proceso era el mismo y solo cambia el valor se la condion del if, se hizo un solo metodo para despues ser llamado
+    public static int three_and_four_of_a_king_For(int[] tallies, int condition){
+        for (int i = 0; i < 6; i++) {
+            if(tallies[i] >= condition){
+                return(i+1)*condition;
+            }
+        }   
         return 0;
     }
 
@@ -216,6 +238,7 @@ for (int i = 0; i < 6; i++)
         return 0;
     }
     
+    
     public static int validatecount(int[] tallies){
         int count=0;
         for (int i = 0; i < tallies.length; i++) {
@@ -226,6 +249,8 @@ for (int i = 0; i < 6; i++)
         return count;
     }
 
+    // se hizo un refactoring con los 2 metodos de abajo 
+    
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5)
     {
         int tallies[] = initializacionCounts(d1, d2, d3, d4, d5);
